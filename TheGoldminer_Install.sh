@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 #create a TheGoldminerPi directory
-sudo mkdir -p Bitcoin
+mkdir -p Bitcoin
 
 #cd into folder
 cd Bitcoin
@@ -13,4 +13,4 @@ sudo apt-get install git
 git clone git://github.com/medikid/TheGoldminerPi.git
 
 cd TheGoldminerPi
-sudo ./setup.sh
+./setup.sh

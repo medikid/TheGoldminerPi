@@ -1,13 +1,8 @@
 #!/bin/sh -e
 
-#come out of TheGoldminerPi folder to create a TheGoldminerPi directory
-cd ..
-
 
 #restart apache2
 sudo /etc/init.d/apache2 reload
-
-
 
 #create simlink of miner.php, api-example.php in var/www
 cd /var/www/

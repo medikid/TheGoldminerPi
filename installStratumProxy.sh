@@ -1,46 +1,24 @@
 #!/bin/sh -e
 
 #come out of TheGoldminerPi folder to create a TheGoldminerPi directory
-cd ..
+cd ~/Desktop/Bitcoin/ ;
 
-#update dependenaceis and git clone bfgminer file
-sudo apt-get -m -f upgrade
-sudo apt-get -m -f update
-sudo apt-get -m -f install build-essential autoconf automake libtool pkg-config libcurl4-gnutls-dev libjansson-dev uthash-dev libncurses5-dev libudev-dev libusb-1.0-0-dev libmicrohttpd-dev curl
+#git clone slash stratum proxy repo
+git clone git://github.com/slush0/stratum-mining-proxy.git ;
 
-git clone git://github.com/luke-jr/bfgminer.git
+#get into the dir
+cd stratum-mining-proxy ;
 
-#install bfgminer
-cd bfgminer
-./autogen.sh
-./configure --disable-avalon --disable-opencl --disable-adl  --disable-bitfury  --disable-bigpic  --disable-littlefury --disable-bitforce   --disable-modminer --disable-x6500 --disable-ztex --with-system-libblkmaker
+# Development package of Python are necessary
+sudo apt-get install python-dev ;
 
-make
-cd ..
+#compile with midstate c extensions, will speeds up midstate calculations
+cd midstatec ;
+sudo make ;
+cd .. ;
 
-#setup autostart bfgminer
-sudo sed -i '/exit 0/i \
- cd ~/Desktop/Bitcoin \
- nohup ./bfgminer/bfgminer --config TheGoldminerPi/miner_config.conf -S all  >/dev/null 2>&1& \
+# This will upgrade setuptools package
+sudo python distribute_setup.py ;
 
-' /etc/rc.local;
-
-
-#install apache2 and php
-sudo apt-get install apache2
-sudo apt-get install php5
-sudo /etc/init.d/apache2 reload
-
-
-
-#create simlink of miner.php, api-example.php in var/www
-cd /var/www/
-sudo mkdir -p TheGoldminer
-cd TheGoldminer
-ln -s /home/pi/Desktop/Bitcoin/bfgminer/miner.php ./miner.php
-ln -s /home/pi/Desktop/Bitcoin/bfgminer/api-example.php ./api-example.php
-
-
-
-
-
+# This will install required dependencies (namely Twisted and Stratum libraries), but don't install the package into the system.
+sudo python setup.py develop ;

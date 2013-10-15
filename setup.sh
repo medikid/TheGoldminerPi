@@ -14,7 +14,7 @@ cd TheGoldminerpi;
 
 #prepare system
 sudo ./upgradeSystem.sh ;
-sudo ./upgradeSystem.sh ;
+sudo ./updateSystem.sh ;
 sudo ./installDeps;
 
 #Install bfgminer

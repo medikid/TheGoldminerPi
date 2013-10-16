@@ -3,7 +3,7 @@
 
 #setup autostart bfgminer
 sudo sed -i '/exit 0/i \
- cd ~/Desktop/Bitcoin \
+ cd /home/pi/Desktop/Bitcoin \
  
  #nohup ./bfgminer/bfgminer --config TheGoldminerPi/miner_config.conf -S all  >/dev/null 2>&1& \
  

@@ -1,13 +1,13 @@
 #!/bin/sh -e
 
-cd ~/Desktop
+cd /home/pi/Desktop ;
 
 sudo mkdir -p Bitcoin ;
 
-cd ~/Desktop/Bitcoin ;
+cd /home/pi/Desktop/Bitcoin ;
 
 sudo git clone git://github.com/medikid/TheGoldminerPi.git ;
-cd ~/Desktop/Bitcoin/TheGoldminerPi ;
+cd /home/pi/Desktop/Bitcoin/TheGoldminerPi ;
 
 #set all .sh files executables
 sudo chmod +x *.sh ;

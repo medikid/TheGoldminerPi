@@ -7,7 +7,7 @@ cd /home/pi/Desktop/Bitcoin ;
 git clone git://github.com/luke-jr/bfgminer.git ;
 
 #install bfgminer
-cd bfgminer
+cd bfgminer ;
 sudo ./autogen.sh ;
 sudo ./configure --disable-avalon --disable-opencl --disable-adl  --disable-bitfury  --disable-bigpic  --disable-littlefury --disable-bitforce   --disable-modminer --disable-x6500 --disable-ztex  ;
 

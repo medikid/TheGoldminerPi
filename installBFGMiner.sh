@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 #come out of TheGoldminerPi folder to create a TheGoldminerPi directory
-cd ~/Desktop/Bitcoin/
+cd /home/pi/Desktop/Bitcoin/
 
 #clone git repository of bfgminer
 git clone git://github.com/luke-jr/bfgminer.git ;

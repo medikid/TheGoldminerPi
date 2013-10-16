@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 #come out of TheGoldminerPi folder to create a TheGoldminerPi directory
-cd ~/Desktop/Bitcoin/ ;
+cd /home/pi/Desktop/Bitcoin/ ;
 
 #git clone slash stratum proxy repo
 git clone git://github.com/slush0/stratum-mining-proxy.git ;

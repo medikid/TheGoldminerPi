@@ -2,7 +2,7 @@
 
 
 #setup autostart bfgminer
-sudo sed -i '/exit 0/i \
+sudo sed -i '/exit 0 /i \
 cd /home/pi/Desktop/Bitcoin \
 \
 #bfgminer commands \

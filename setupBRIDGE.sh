@@ -113,4 +113,4 @@ function ConfigNetBridge () {
 
  }
 
-sudo ConfigNetBridge ;
+ConfigNetBridge ;

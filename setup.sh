@@ -39,6 +39,8 @@ sudo ./setAutoMining.sh ;
 #setup bridge
 sudo ./setupBRIDGE.sh ;
 
+#restart network to appply new settings
+sudo /etc/init.d/networking restart ;
 
 #setup apache server
 sudo ./setupServer.sh ;

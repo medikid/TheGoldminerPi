@@ -30,6 +30,12 @@ function ConfigNetBridge () {
 	if [ "$subnet" = "" ]; then
 			subnet="192.168.0.0"
 	fi
+	
+	echo -n "Input LAN Gateway [192.168.0.1]: "
+	read getway ;
+	if [ "$gateway" = "" ]; then
+			gateway="192.168.0.1"
+	fi
 
 	echo -n "Input IP Range Start [192.168.0.2]: "
 	read ipstart ;
@@ -70,6 +76,7 @@ function ConfigNetBridge () {
 			iface $land inet static
 							address $lip
 							netmask $netmask
+							gateway $gateway
 
 			auto $wifid
 			iface $wifid inet dhcp

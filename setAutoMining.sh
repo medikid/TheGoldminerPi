@@ -1,8 +1,7 @@
 #!/bin/sh -e
 
-#setup autostart bfgminer
-sudo sed -i 's/fi/i \
-fi \
+#setup autostart bfgminer -- replace line that starts (^) with exit 0
+sudo sed -i '/^exit 0/i \
 \
 \
 #bfgminer commands \

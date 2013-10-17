@@ -1,8 +1,11 @@
 #!/bin/sh -e
 
+#there are two entries of exit 0, lets morph the first entry "exit 0"
+sudo sed -i '/"exit 0"/i \
+"--e x i t 0--" ' /etc/rc.local ;
 
 #setup autostart bfgminer
-sudo sed -i '/exit 0 /i \
+sudo sed -i '/exit 0/i \
 cd /home/pi/Desktop/Bitcoin \
 \
 #bfgminer commands \

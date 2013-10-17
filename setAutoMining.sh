@@ -15,6 +15,3 @@ sudo sed -i '/exit 0/i \
  #nohup ./stratum-mining-proxy/mining_proxy.py -o stratum.btcguild.com -p 3333  >/dev/null 2>&1& \
 
 ' /etc/rc.local ;
-
-
-

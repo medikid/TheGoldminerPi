@@ -2,4 +2,4 @@
 
 
 #update dependenaceis and git clone bfgminer file
-sudo apt-get -m -f upgrade
+sudo apt-get -m -f upgrade ;

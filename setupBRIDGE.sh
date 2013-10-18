@@ -13,54 +13,54 @@ function ConfigNetBridge () {
 	echo "# Configure linux to connect wifi network to wired network #"
 	echo "############################################################"
 	echo ""
-	echo -n "Input LAN IP [192.168.0.1]: "
+	echo -n "Enter Preferred Static LAN IP for the Wired RJ45 Port [192.168.1.100]: "
 	read lip ;
 	if [ "$lip" = "" ]; then
-			lip="192.168.0.1"
+			lip="192.168.1.100"
 	fi
 
-	echo -n "Input LAN Netmask [255.255.255.0]: "
+	echo -n "Enter LAN Netmask [255.255.255.0]: "
 	read netmask ;
 	if [ "$netmask" = "" ]; then
 			netmask="255.255.255.0"
 	fi
 
-	echo -n "Input LAN Subnet [192.168.0.0]: "
+	echo -n "Enter LAN Subnet mask [192.168.1.0]: "
 	read subnet ;
 	if [ "$subnet" = "" ]; then
-			subnet="192.168.0.0"
+			subnet="192.168.1.0"
 	fi
 	
-	echo -n "Input LAN Gateway [192.168.0.1]: "
+	echo -n "Enter LAN Gateway [192.168.1.1]: "
 	read getway ;
 	if [ "$gateway" = "" ]; then
-			gateway="192.168.0.1"
+			gateway="192.168.1.1"
 	fi
 
-	echo -n "Input IP Range Start [192.168.0.2]: "
+	echo -n "Enter IP Range Start [192.168.1.101]: "
 	read ipstart ;
 	if [ "$ipstart" = "" ]; then
-			ipstart="192.168.0.2"
+			ipstart="192.168.1.101"
 	fi
 
-	echo -n "Input IP Range End [192.168.0.200]: "
+	echo -n "Enter IP Range End [192.168.1.200]: "
 	read ipend ;
 	if [ "$ipend" = "" ]; then
-			ipend="192.168.0.200"
+			ipend="192.168.1.200"
 	fi
 
-	echo -n "Input Wifi SSID: "
+	echo -n "Enter Wifi SSID (Access point Name): "
 	read ssid ;
-	echo -n "Input Wifi Password: "
+	echo -n "Enter Wifi Password: "
 	read password ;
 
-	echo -n "Input LAN Device [eth0]: "
+	echo -n "Enter LAN Device [eth0]: "
 	read landv ;
 	if [ "$land" = "" ]; then
 			land="eth0"
 	fi
 
-	echo -n "Input Wifi Device [wlan0]: "
+	echo -n "Enter Wifi Device [wlan0]: "
 	read wifid ;
 	if [ "$wifid" = "" ]; then
 			wifid="wlan0"
@@ -70,27 +70,30 @@ function ConfigNetBridge () {
 	clear
 
 	#Configure devices
+	
 	echo "
-			auto lo $land
-					iface lo inet loopback
-			iface $land inet static
-							address $lip
-							netmask $netmask
-							gateway $gateway
+	auto lo
+	iface lo inet loopback
+	
+	allow-hotplug $land
+	iface $land inet static
+		address $lip
+		netmask $netmask
+		#gateway $gateway #Not working on the same IP pool
 
-			auto $wifid
-			iface $wifid inet dhcp
-			wpa-ssid \"$ssid\"
-			wpa-psk \"$password\"
+	auto $wifid
+	iface $wifid inet manual
+	wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+	iface default inet dhcp
 
-			up iptables-restore > /etc/iptables.ipv4.nat
+	up iptables-restore > /etc/iptables.ipv4.nat
 	" > /etc/network/interfaces
 
 	#install and configure the DHCP server
 	clear
 
 	echo "
-			option domain-name \"wifi2lan.rpi\";
+			option domain-name \"TheGoldminerPi\";
 			option domain-name-servers 8.8.8.8, 8.8.4.4;
 			subnet $subnet netmask $netmask {
 					range $ipstart $ipend;
